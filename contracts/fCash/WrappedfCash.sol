@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.11;
+pragma solidity ^0.8.0;
 pragma experimental ABIEncoderV2;
 
 import "../lib/EncodeDecode.sol";
@@ -45,7 +45,7 @@ contract WrappedfCash is IWrappedfCash, ERC777Upgradeable, AllowfCashReceiver {
 
         _fCashId = EncodeDecode.encodeERC1155Id(currencyId, maturity, Constants.FCASH_ASSET_TYPE);
         (IERC20 underlyingToken, /* */) = _getUnderlyingToken(currencyId);
-        string memory _symbol = address(underlyingToken) == address(0) ? 
+        string memory _symbol = address(underlyingToken) == address(0) ?
             "ETH" :
             IERC20Metadata(address(underlyingToken)).symbol();
 
@@ -135,7 +135,7 @@ contract WrappedfCash is IWrappedfCash, ERC777Upgradeable, AllowfCashReceiver {
     function _calculateMint(
         uint256 fCashAmount
     ) internal returns (
-        uint8 marketIndex, 
+        uint8 marketIndex,
         int256 assetCashInternal,
         int256 underlyingCashInternal
     ) {
@@ -448,7 +448,7 @@ contract WrappedfCash is IWrappedfCash, ERC777Upgradeable, AllowfCashReceiver {
     function getUnderlyingToken()
         public
         view
-        override 
+        override
         returns (IERC20 underlyingToken, int256 underlyingPrecision)
     {
         uint16 currencyId = getCurrencyId();
@@ -478,7 +478,7 @@ contract WrappedfCash is IWrappedfCash, ERC777Upgradeable, AllowfCashReceiver {
     function getAssetToken()
         public
         view
-        override 
+        override
         returns (IERC20 underlyingToken, int256 underlyingPrecision, TokenType tokenType)
     {
         (Token memory asset, /* Token memory underlying */) = NotionalV2.getCurrency(
